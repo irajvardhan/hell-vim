@@ -21,6 +21,7 @@ int main()
 	
 	// prints 246
 	cout<< *bar()<<endl;	
+	
 	return 0;
 	
 }

@@ -17,7 +17,7 @@ class Stack{
 			top = NULL;
 		}
 
-		void push(int val);
+		void push(int);
 		int pop();
 	
 };
@@ -26,16 +26,9 @@ void Stack::push(int val){
 	Node* temp;
 	temp = new Node();
 	temp->val = val;
-	if (top == NULL){
-		top = temp;
-	}
-	else{
-		temp->next = top;
-		top = temp;		
-	}
-
+	temp->next = top;
+	top = temp;		
 	size = size + 1;
-
 }
 
 int Stack::pop(){
@@ -43,10 +36,12 @@ int Stack::pop(){
 		return -1;
 	
 	int val;
-       
 	val = top->val;	
+	
+	Node* temp = top;
 	top = top->next;
 	size -= 1;
+	delete temp;
 
 	return val;
 

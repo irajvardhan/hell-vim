@@ -3,39 +3,36 @@
 using namespace std;
 
 int main(){
-	int r = 20;
-	int *pi = &r;
- 	
-	int **ppi = &pi;
+
+	int a[] = {10,20,30,40,50};
+	int *p[] = {a,a+3,a+4,a+1,a+2};
+	int **ptr = p;
 	
-	// address where r is stored
-	cout<<"pi: "<<pi<<endl;
+	cout<<"ptr-p: "<<ptr-p<<endl;
 
-	// value pointed to by pi [20]
-	cout<<"*pi: "<<*pi<<endl;
-
-	// address pointed to by ppi [address where pi is stored]
-	cout<<"ppi: "<<ppi<<endl;
-
-	// value pointed to by ppi [address stored by pi = address where r is stored]
-	cout<<"*ppi "<<*ppi<<endl;
+	// second one will be +8bytes
+	cout<<ptr<<endl;
+	cout<<ptr+1<<endl;	
 	
-	int q = 10;
-	*ppi = &q;
-	cout<<"-------"<<endl;
+	// This prints 10 20 30 40 50
+	// say array a is at 1000
+	// *ptr is 1000 => **ptr = 10
+	// *ptr+1 is 1000+4 => *(*ptr+1) = 20
+	cout<<*(*ptr)<<endl;
+	cout<<*(*ptr + 1)<<endl;
+	cout<<*(*ptr + 2)<<endl;
+	cout<<*(*ptr + 3)<<endl;
+	cout<<*(*ptr + 4)<<endl;
 
-	// address where q is stored
-	cout<<"pi: "<<pi<<endl;
+	cout<<"---"<<endl;
 
-	// value pointed to by pi which is 20
-	cout<<"*pi "<<*pi<<endl;
+	// prints 10 40 50 20 30
+	cout<<**(ptr)<<endl;
+	cout<<**(ptr + 1)<<endl;
+	cout<<**(ptr + 2)<<endl;
+	cout<<**(ptr + 3)<<endl;
+	cout<<**(ptr + 4)<<endl;
 
-	// same as before: address where pi is stored
-	cout<<"ppi: "<<ppi<<endl;
-
-	// address where q is stored
-	cout<<"*ppi: "<<*ppi<<endl;
-	
 	return 0;
 	
 }

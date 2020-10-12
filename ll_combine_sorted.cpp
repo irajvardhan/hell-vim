@@ -37,7 +37,7 @@ Node* merge(Node* p1, Node* p2){
 		return p1;
 	}
 	else{
-		p2->next = merge(p2->next, p1);
+		p2->next = merge(p1, p2->next);
 		return p2;
 	}
 }

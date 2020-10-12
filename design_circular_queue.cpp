@@ -28,7 +28,7 @@ class CircularQueue{
 
 		bool dequeue();
 
-		bool enqueue(int);
+		bool enqueue(int x);
 		
 		// get element at front of circular queue
 		int front();
@@ -59,7 +59,7 @@ bool CircularQueue::isFull(){
 int CircularQueue::front(){
 	if (isEmpty())
 		return -1;
-	return cq.at(head);	
+	return cq[head];	
 }
 
 int CircularQueue::rear(){
@@ -68,14 +68,14 @@ int CircularQueue::rear(){
 	
 	int tail;
 	tail = (head + count - 1)%capacity;
-	return cq.at(tail);
+	return cq[tail];
 }
 
 bool CircularQueue::enqueue(int x){
 	if (isFull())
 		return false;
 	int index = (head + count)%capacity;
-	cq.at(index) = x;
+	cq[index] = x;
 	count++;
 	return true;
 }

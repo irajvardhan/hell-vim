@@ -24,7 +24,8 @@ Node* newNode(int val){
 	}
 }
 
-Node* removeDuplicates(Node* head, int x){
+// Reomve all occurenes of x in the link list
+Node* removeAll(Node* head, int x){
 	Node* dummy = newNode(-1);
 	dummy->next = head;
 
@@ -44,7 +45,14 @@ Node* removeDuplicates(Node* head, int x){
 		}
 
 	}
-	return dummy->next;
+
+	// head may have changed if originally head was pointing to a node with value as x
+	head = dummy->next;
+
+	// we no longer need the dummy node
+	delete dummy;
+
+	return head;
 
 }
 
@@ -68,17 +76,17 @@ int main(){
 	head->next->next = newNode(1);
 	head->next->next->next = newNode(3);
 	head->next->next->next->next = newNode(1);
-	head->next->next->next->next->next = newNode(2);	
+	head->next->next->next->next->next = newNode(2);
 	head->next->next->next->next->next->next = newNode(3);
 	head->next->next->next->next->next->next->next = newNode(2);
 
 	cout<<"The original list is"<<endl;
 	displayList(head);
-	
+
 	int x = 1;
-	
-	head = removeDuplicates(head,x);
+
+	head = removeAll(head,x);
 	cout<<"The list after removing all occurenes of "<<x<<" is"<<endl;
-	displayList(head);	
+	displayList(head);
 	return 0;
 }
