@@ -14,16 +14,15 @@ Node* newNode(int val){
 	return temp;
 }
 
+/*
+ * O(n^2) approach
+ * */
 void removeDuplicates(Node* head){
-	if (head == NULL)
-		return;
 	Node *ptr1, *ptr2;
-
 	ptr1 = head;
 	
 	// Note: ptr1 may become NULL if all nodes on the right are deleted.
 	while (ptr1!=NULL and ptr1->next!=NULL){
-		//cout<<ptr1->val<<endl;
 		ptr2 = ptr1;
 
 		// ptr2 is guaranteed to be valid because we know ptr1 is valid

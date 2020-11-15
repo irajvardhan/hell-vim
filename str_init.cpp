@@ -4,7 +4,7 @@ using namespace std;
 
 int main(){
 
-	char s[5] = "hello";
+	char s[6] = "hello";
 	s[0] = 'p';
 	cout<<s<<endl;	
 
