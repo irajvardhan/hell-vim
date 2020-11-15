@@ -110,11 +110,12 @@ void LRUCache::put(int key, int value){
 		// check if we're at capacity
 		if(size == capacity){
 			Node* victim = tail->prev;
-			int victim_key = victim->key;
-
 			detach(victim);
-			it = mymap.find(victim_key);
+			it = mymap.find(victim->key);
 			mymap.erase(it);
+			
+			delete victim;
+			victim = NULL;
 			
 			size--;
 		}

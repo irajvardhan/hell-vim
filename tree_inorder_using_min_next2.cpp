@@ -1,5 +1,14 @@
 #include<iostream>
+#include<stack>
+
 using namespace std;
+
+/*
+ * This question is a varition of tree_inorder_using_min_and_next.cpp
+ * Here the findNext() call does not require any argument.
+ * It is derived from the LC question 173.
+ * */
+
 
 typedef struct Node{
 	struct Node* left;
@@ -16,40 +25,38 @@ Node* newNode(int val){
 	return node;
 }
 
+stack<Node*> left_nodes;
+
+void store_left_nodes(Node* root){
+	while(root!=NULL){
+		left_nodes.push(root);
+		root = root->left;
+	}
+}
+
 // returns min value node in BST
 Node* findMin(Node* root){
 	if (root == NULL)
-		return root;
+		return NULL;
 
-	if (root->left == NULL)
-		return root;
-	
-	return findMin(root->left);
+	while (root->left != NULL){
+		left_nodes.push(root);
+		root = root->left;
+	}		
+	return root;
 }
 
-// returns inorder successor of the input node n 
-// root: root of BST
-// n: input node for which we need to find the next node
-Node* findNext(Node* root, Node* n){
-	if (n == NULL)
+Node* findNext(){
+	if(left_nodes.empty())
 		return NULL;
-	
-	if (n->right)
-		return findMin(n->right);
-	
-	// start from the root
-	Node* cur = root;
-	Node* succ = NULL;
-	while(cur!=NULL){
-		if (cur->val > n->val){
-			succ = cur;
-			cur = cur->left;
-		}else{
-			cur = cur->right;
-		}
-	}	
-	return succ;
-	
+
+	Node* node = left_nodes.top();
+	left_nodes.pop();
+
+	if(node->right){
+		store_left_nodes(node->right);
+	}
+	return node;
 }
 
 // inorder implementation using findMin and findNext
@@ -59,11 +66,11 @@ void inorder(Node* root){
 		return;
 
 	Node* cur = findMin(root);
+	store_left_nodes(cur->right);
 	while(cur!=NULL){
 		cout<<cur->val<<" "<<endl;
-		cur = findNext(root,cur);
+		cur = findNext();
 	}
-
 }
 
 int main(){
